@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentación Probabilidad</title>
+
+  <!-- Reveal.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme" />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Estilos propios -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1. PORTADA -->
+      <section>
+        <div class="hero-badge">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>Presentación interactiva</span>
+        </div>
+
+        <h1 class="hero-title">
+          Paralelo entre la distribución de <span>Poisson</span><br>
+          y la distribución <span>exponencial negativa</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Aplicación, fundamentos y relación teórica
+        </p>
+
+        <div class="hero-info">
+          <div class="info-pill"><i class="fa-solid fa-user"></i> Luis Felipe Mayorga Tibaquicha</div>
+          <div class="info-pill"><i class="fa-solid fa-book"></i> Probabilidad</div>
+          <div class="info-pill"><i class="fa-solid fa-building-columns"></i> Universidad Distrital</div>
+        </div>
+      </section>
+
+      <!-- 2. IDEA CENTRAL -->
+      <section>
+        <div class="section-tag">Idea principal</div>
+        <h2 class="section-title">Dos formas de estudiar el mismo fenómeno</h2>
+        <p class="section-text">
+          La distribución de Poisson y la distribución exponencial negativa no son modelos aislados:
+          ambas describen un mismo proceso aleatorio desde perspectivas diferentes.
+        </p>
+
+        <div class="cards">
+          <article class="card card-poisson">
+            <div class="card-icon">
+              <i class="fa-solid fa-hashtag"></i>
+            </div>
+            <h3>Poisson</h3>
+            <p class="card-type">Modelo discreto</p>
+            <p>
+              Responde la pregunta: <strong>¿cuántos eventos ocurren en un intervalo?</strong>
+            </p>
+          </article>
+
+          <article class="card card-exp">
+            <div class="card-icon">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <h3>Exponencial negativa</h3>
+            <p class="card-type">Modelo continuo</p>
+            <p>
+              Responde la pregunta: <strong>¿cuánto tiempo debo esperar hasta el próximo evento?</strong>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. COMPARACION -->
+      <section>
+        <div class="section-tag">Comparación formal</div>
+        <h2 class="section-title">Poisson vs Exponencial negativa</h2>
+
+        <div class="comparison-grid">
+          <div class="comparison-card">
+            <h3><i class="fa-solid fa-hashtag"></i> Poisson</h3>
+            <ul>
+              <li><strong>Tipo de variable:</strong> discreta</li>
+              <li><strong>Qué modela:</strong> número de eventos</li>
+              <li><strong>Soporte:</strong> \( x = 0,1,2,\dots \)</li>
+              <li><strong>Parámetro:</strong> \( \lambda \) o \( \lambda t \)</li>
+              <li><strong>Media:</strong> \( E[X]=\lambda \)</li>
+              <li><strong>Varianza:</strong> \( Var(X)=\lambda \)</li>
+            </ul>
+          </div>
+
+          <div class="comparison-card">
+            <h3><i class="fa-regular fa-clock"></i> Exponencial negativa</h3>
+            <ul>
+              <li><strong>Tipo de variable:</strong> continua</li>
+              <li><strong>Qué modela:</strong> tiempo de espera</li>
+              <li><strong>Soporte:</strong> \( t \ge 0 \)</li>
+              <li><strong>Parámetro:</strong> \( \lambda \)</li>
+              <li><strong>Media:</strong> \( E[T]=1/\lambda \)</li>
+              <li><strong>Varianza:</strong> \( Var(T)=1/\lambda^2 \)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PROCESO DE POISSON -->
+      <section>
+        <div class="section-tag">Origen común</div>
+        <h2 class="section-title">El proceso de Poisson como fundamento</h2>
+
+        <div class="glass-box">
+          <p class="section-text">
+            Ambas distribuciones surgen del <strong>proceso de Poisson</strong>, donde los eventos:
+          </p>
+
+          <div class="pill-list">
+            <span class="mini-pill">son independientes</span>
+            <span class="mini-pill">ocurren con tasa constante \( \lambda \)</span>
+            <span class="mini-pill">son raros en intervalos muy pequeños</span>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-line"></div>
+            <div class="timeline-point p1"></div>
+            <div class="timeline-point p2"></div>
+            <div class="timeline-point p3"></div>
+            <div class="timeline-point p4"></div>
+          </div>
+
+          <div class="timeline-labels">
+            <span>Conteo de eventos en un intervalo → <strong>Poisson</strong></span>
+            <span>Tiempo entre eventos → <strong>Exponencial negativa</strong></span>
+          </div>
+        </div>
+      </section>
+      <!-- 5. MINI SIMULACION DEL PROCESO DE POISSON -->
+      <section>
+        <div class="section-tag">Simulación visual</div>
+        <h2 class="section-title">Mini simulación del proceso de Poisson</h2>
+        <p class="section-text">
+          Genera eventos aleatorios en un intervalo de tiempo fijo. Así puedes ver que
+          <strong>Poisson cuenta cuántos eventos ocurren</strong> y la
+          <strong>exponencial negativa describe los tiempos entre ellos</strong>.
+        </p>
+
+        <div class="simulation-layout">
+          <div class="simulation-controls">
+            <div class="result-card">
+              <h3>Controles</h3>
+
+              <label for="simLambdaSlider"><strong>Valor de \( \lambda \):</strong></label>
+              <input type="range" id="simLambdaSlider" min="0.5" max="5" step="0.5" value="2">
+              <div class="lambda-value">\( \lambda = \) <span id="simLambdaValue">2</span></div>
+
+              <button id="generateEventsBtn" class="sim-btn">
+                <i class="fa-solid fa-bolt"></i> Generar eventos
+              </button>
+            </div>
+
+            <div class="result-card">
+              <h3>Resultados</h3>
+              <p><strong>Intervalo observado:</strong> 0 a 10</p>
+              <p><strong>Número de eventos:</strong> <span id="eventCount">0</span></p>
+              <p><strong>Tiempos entre eventos:</strong></p>
+              <div id="interarrivalTimes" class="interarrival-box">Aún no se ha generado la simulación.</div>
+            </div>
+          </div>
+
+          <div class="simulation-visual">
+            <div class="simulation-card">
+              <h3>Línea de tiempo del proceso</h3>
+
+              <div class="sim-timeline-wrapper">
+                <div class="sim-axis-labels">
+                  <span>0</span>
+                  <span>2</span>
+                  <span>4</span>
+                  <span>6</span>
+                  <span>8</span>
+                  <span>10</span>
+                </div>
+                
+
+                <div id="simTimeline" class="sim-timeline">
+                <div class="sim-timeline-line"></div>
+                <div id="simTooltip" class="sim-tooltip"></div>
+                </div>
+              </div>
+
+              <p class="sim-note">
+                Cada punto representa un evento. La cantidad total observada en el intervalo
+                se relaciona con <strong>Poisson</strong>, y las separaciones entre puntos con la
+                <strong>exponencial negativa</strong>.
+              </p>
+              <p id="simLegend" class="sim-legend"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 6. RELACION MATEMATICA -->
+      <section>
+        <div class="section-tag">Conexión matemática</div>
+        <h2 class="section-title">Derivación de la relación</h2>
+
+        <div class="formula-step fragment">
+          <p class="math">\( P(T > t) = P(N(t)=0) \)</p>
+          <p>Esperar más de \( t \) equivale a que no ocurra ningún evento en \([0,t]\).</p>
+        </div>
+
+        <div class="formula-step fragment">
+          <p class="math">\( N(t) \sim Poisson(\lambda t) \)</p>
+          <p>Entonces usamos la probabilidad de cero eventos en una Poisson.</p>
+        </div>
+
+        <div class="formula-step fragment">
+          <p class="math">\( P(N(t)=0)=\dfrac{e^{-\lambda t}(\lambda t)^0}{0!} \)</p>
+          <p>Como \( (\lambda t)^0=1 \) y \( 0!=1 \), la expresión se simplifica.</p>
+        </div>
+
+        <div class="formula-step fragment highlight-step">
+          <p class="math">\( P(T > t)=e^{-\lambda t} \)</p>
+          <p>Esta es la función de supervivencia de la distribución exponencial negativa.</p>
+        </div>
+      </section>
+
+      <!-- 7. INTERACTIVO -->
+      <section>
+        <div class="section-tag">Interactividad</div>
+        <h2 class="section-title">Efecto del parámetro \( \lambda \)</h2>
+
+        <div class="interactive-layout">
+          <div class="control-panel">
+            <label for="lambdaSlider"><strong>Valor de \( \lambda \):</strong></label>
+            <input type="range" id="lambdaSlider" min="0.5" max="8" step="0.5" value="3">
+            <div class="lambda-value">\( \lambda = \) <span id="lambdaValue">3</span></div>
+
+            <div class="result-card">
+              <h3>Interpretación</h3>
+              <p id="lambdaText">
+                Cuando \( \lambda = 3 \), se esperan más eventos por unidad de tiempo y el tiempo
+                promedio de espera es menor.
+              </p>
+              <p><strong>Media Poisson:</strong> <span id="poissonMean">3.00</span></p>
+              <p><strong>Media Exponencial:</strong> <span id="expMean">0.33</span></p>
+            </div>
+          </div>
+
+          <div class="chart-panel">
+            <div class="chart-card">
+              <h3>Poisson: probabilidad de \( X=k \)</h3>
+              <canvas id="poissonChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+              <h3>Exponencial negativa: \( f(t)=\lambda e^{-\lambda t} \)</h3>
+              <canvas id="expChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+            <!-- 8. APLICACION REAL -->
+      <section>
+        <div class="section-tag">Aplicación comparativa</div>
+        <h2 class="section-title app-title">Ejemplo: llegadas de clientes a un sistema de atención</h2>
+
+        <div class="app-layout">
+          <div class="app-card">
+            <h3><i class="fa-solid fa-users"></i> Contexto</h3>
+            <p>
+              Supóngase que las llegadas de clientes ocurren de manera aleatoria e independiente
+              con una tasa promedio de <strong>\( \lambda = 3 \)</strong> clientes por hora.
+            </p>
+            <p>
+              Este fenómeno puede analizarse desde dos perspectivas complementarias:
+              el <strong>número de clientes</strong> que llegan en una hora y el
+              <strong>tiempo de espera</strong> hasta la próxima llegada.
+            </p>
+          </div>
+
+          <div class="app-card">
+            <h3><i class="fa-solid fa-diagram-project"></i> Modelos</h3>
+            <p><strong>Poisson:</strong> \( X \sim Poisson(3) \)</p>
+            <p><strong>Exponencial negativa:</strong> \( T \sim Exponencial(3) \)</p>
+            <p>
+              Ambos provienen del mismo proceso de Poisson y comparten el parámetro \( \lambda \).
+            </p>
+          </div>
+
+          <div class="app-card result-emphasis app-with-chart">
+            <div class="app-result-text">
+            <h3><i class="fa-solid fa-hashtag"></i> Resultado con Poisson</h3>
+            <p class="math app-math">\( P(X=2)=\dfrac{e^{-3}3^2}{2!}\approx 0.2240 \)</p>
+            <p>
+            La probabilidad de que lleguen exactamente <strong>2 clientes en una hora</strong>
+            es aproximadamente <strong>22.40 %</strong>.
+            </p>
+            </div>
+
+            <div class="mini-chart-box">
+             <canvas id="miniPoissonChart"></canvas>
+            </div>
+        </div>
+
+          
+
+          <div class="app-card result-emphasis">
+            <h3><i class="fa-regular fa-clock"></i> Resultado con exponencial negativa</h3>
+            <p class="math app-math">\( P(T>1/3)=e^{-3(1/3)}=e^{-1}\approx 0.3679 \)</p>
+            <p>
+              La probabilidad de esperar más de <strong>20 minutos</strong> hasta la próxima llegada
+              es aproximadamente <strong>36.79 %</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      
+      <!-- 9. INTERPRETACION -->
+      <section>
+  <div class="section-tag">Interpretación conjunta</div>
+  <h2 class="section-title">¿Qué muestran estos resultados?</h2>
+
+  <div class="insight-grid">
+
+    <div class="insight-card">
+      <div class="insight-icon"><i class="fa-solid fa-hashtag"></i></div>
+      <h3>Conteo de eventos</h3>
+      <p>
+        La distribución de <strong>Poisson</strong> permite modelar
+        cuántos eventos ocurren en un intervalo fijo de tiempo.
+      </p>
+      <p class="insight-highlight">
+        En este caso: número de clientes por hora.
+      </p>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-icon"><i class="fa-regular fa-clock"></i></div>
+      <h3>Tiempo entre eventos</h3>
+      <p>
+        La distribución <strong>exponencial negativa</strong> describe
+        el tiempo de espera hasta que ocurre el siguiente evento.
+      </p>
+      <p class="insight-highlight">
+        En este caso: tiempo hasta la próxima llegada.
+      </p>
+    </div>
+
+    <div class="insight-card highlight-insight">
+      <div class="insight-icon"><i class="fa-solid fa-link"></i></div>
+      <h3>Relación fundamental</h3>
+      <p>
+        Ambas distribuciones provienen del <strong>mismo proceso de Poisson</strong>
+        y están gobernadas por el mismo parámetro \( \lambda \).
+      </p>
+      <p class="math small-math">
+        \( E[T] = \frac{1}{\lambda} \)
+      </p>
+      <p class="insight-highlight">
+        Más eventos → menor tiempo de espera.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+      <!-- 10. CONCLUSIONES -->
+      <section>
+  <div class="section-tag">Conclusiones</div>
+  <h2 class="section-title">Ideas finales</h2>
+
+  <div class="conclusion-list">
+
+    <div class="conclusion-item">
+      <span class="conclusion-number">1</span>
+      <p>
+        La distribución de <strong>Poisson</strong> permite modelar el número de eventos
+        en un intervalo fijo de tiempo.
+      </p>
+    </div>
+
+    <div class="conclusion-item">
+      <span class="conclusion-number">2</span>
+      <p>
+        La distribución <strong>exponencial negativa</strong> describe el tiempo de espera
+        hasta la ocurrencia del siguiente evento.
+      </p>
+    </div>
+
+    <div class="conclusion-item">
+      <span class="conclusion-number">3</span>
+      <p>
+        Ambas distribuciones surgen del <strong>proceso de Poisson</strong> y comparten
+        el parámetro \( \lambda \), que representa la tasa de ocurrencia.
+      </p>
+    </div>
+
+    <div class="conclusion-item highlight-conclusion">
+      <span class="conclusion-number">4</span>
+      <p>
+        Por ello, un mismo fenómeno puede analizarse desde dos perspectivas:
+        <strong>cuántos eventos ocurren</strong> y <strong>cuánto tiempo hay entre ellos</strong>,
+        lo que permite una comprensión más completa del proceso.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">Aplicaciones reales</div>
+  <h2 class="section-title">¿Dónde se aplican estos modelos?</h2>
+
+  <div class="real-grid">
+
+    <div class="real-card" data-info="Poisson modela el número de llamadas recibidas en un intervalo, mientras que la exponencial describe el tiempo entre llamadas.">
+      <div class="real-icon"><i class="fa-solid fa-phone"></i></div>
+      <h3>Telecomunicaciones</h3>
+      <p>
+        Modelar llamadas entrantes en un call center y el tiempo entre llamadas.
+      </p>
+    </div>
+
+    <div class="real-card" data-info="Poisson permite estimar cuántos usuarios visitan una página, y la exponencial modela el tiempo entre accesos.">
+      <div class="real-icon"><i class="fa-solid fa-globe"></i></div>
+      <h3>Tráfico web</h3>
+      <p>
+        Número de visitas a una página y tiempo entre accesos de usuarios.
+      </p>
+    </div>
+
+    <div class="real-card" data-info="Poisson describe cuántos clientes llegan a un sistema, y la exponencial el tiempo entre llegadas.">
+      <div class="real-icon"><i class="fa-solid fa-people-line"></i></div>
+      <h3>Teoría de colas</h3>
+      <p>
+        Llegadas de clientes a bancos, supermercados o sistemas de atención.
+      </p>
+    </div>
+
+    <div class="real-card" data-info="Poisson modela la llegada de paquetes de datos, y la exponencial el tiempo entre transmisiones.">
+      <div class="real-icon"><i class="fa-solid fa-microchip"></i></div>
+      <h3>Sistemas y redes</h3>
+      <p>
+        Llegada de paquetes de datos y tiempos de transmisión en redes.
+      </p>
+    </div>
+
+  </div>
+
+  <div class="real-conclusion">
+  <p id="realText">
+    Pasa el cursor sobre una aplicación para ver su interpretación.
+  </p>
+</div>
+</section>
+      <!-- 10. CIERRE -->
+      <section>
+        <div class="closing-box">
+          <h2 class="section-title center-title">Gracias</h2>
+          <p class="closing-text">
+            Paralelo entre la distribución de Poisson y la distribución exponencial negativa
+          </p>
+          <p class="closing-subtext">¿Preguntas?</p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Reveal.js -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)'], ['$', '$']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <!-- Script propio -->
+  <script src="script.js"></script>
+</body>
+</html>
