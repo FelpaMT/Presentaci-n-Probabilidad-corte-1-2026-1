@@ -298,3 +298,36 @@ realCards.forEach(card => {
     realText.textContent = "Pasa el cursor sobre una aplicación para ver su interpretación.";
   });
 });
+
+const quizButtons = document.querySelectorAll(".quiz-btn");
+const feedback = document.getElementById("quiz-feedback");
+
+quizButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const isCorrect = btn.getAttribute("data-correct") === "true";
+
+    if (isCorrect) {
+      feedback.textContent = "Correcto. La exponencial modela el tiempo entre eventos.";
+      feedback.style.color = "green";
+    } else {
+      feedback.textContent = "Incorrecto. Intenta nuevamente.";
+      feedback.style.color = "red";
+    }
+  });
+});
+
+const solutionButtons = document.querySelectorAll(".solution-btn");
+
+document.querySelectorAll(".solution-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const targetId = button.getAttribute("data-target");
+    const solutionBox = document.getElementById(targetId);
+
+    if (!solutionBox) return;
+
+    const isOpen = solutionBox.classList.contains("open");
+    solutionBox.classList.toggle("open");
+
+    button.textContent = isOpen ? "Ver solución" : "Ocultar solución";
+  });
+});

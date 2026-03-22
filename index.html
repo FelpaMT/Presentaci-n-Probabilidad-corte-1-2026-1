@@ -377,7 +377,200 @@
 
   </div>
 </section>
+<section>
+  <div class="section-tag">Aplicación comparativa</div>
+  <h2 class="section-title app-title">
+    Ejemplo: llegadas de clientes a un sistema de atención
+  </h2>
 
+  <div class="app-layout">
+
+    <!-- CONTEXTO -->
+    <div class="app-card">
+      <h3><i class="fa-solid fa-users"></i> Contexto</h3>
+      <p>
+        Supóngase que las llegadas de clientes ocurren de manera aleatoria e independiente,
+        con una tasa promedio de:
+      </p>
+
+      <p class="math app-math">
+        \( \lambda = 3 \) clientes por hora
+      </p>
+
+      <p>
+        Este fenómeno puede analizarse desde dos perspectivas:
+      </p>
+
+      <ul class="context-list">
+        <li><strong>Número de clientes</strong> en un intervalo de tiempo</li>
+        <li><strong>Tiempo de espera</strong> hasta la próxima llegada</li>
+      </ul>
+    </div>
+
+    <!-- MODELOS -->
+    <div class="app-card">
+      <h3><i class="fa-solid fa-diagram-project"></i> Modelos</h3>
+
+      <p><strong>Poisson:</strong></p>
+      <p class="math">\( X \sim Poisson(3) \)</p>
+
+      <p><strong>Exponencial negativa:</strong></p>
+      <p class="math">\( T \sim Exponencial(3) \)</p>
+
+      <p>
+        Ambos modelos describen el mismo proceso desde perspectivas distintas
+        y comparten el parámetro \( \lambda \).
+      </p>
+    </div>
+
+    <!-- RESULTADO POISSON -->
+    <div class="app-card result-emphasis app-with-chart">
+      <div class="app-result-text">
+        <h3><i class="fa-solid fa-hashtag"></i> Resultado con Poisson</h3>
+
+        <p class="math app-math">
+          \( P(X=2)=\dfrac{e^{-3}3^2}{2!} \approx 0.2240 \)
+        </p>
+
+        <p>
+          La probabilidad de que lleguen exactamente
+          <strong>2 clientes en una hora</strong>
+          es aproximadamente <strong>22.40 %</strong>.
+        </p>
+      </div>
+
+      <div class="mini-chart-box">
+        <canvas id="miniPoissonChart"></canvas>
+      </div>
+    </div>
+
+    <!-- RESULTADO EXPONENCIAL -->
+    <div class="app-card result-emphasis">
+      <h3><i class="fa-regular fa-clock"></i> Resultado con exponencial negativa</h3>
+
+      <p class="math app-math">
+        \( P(T>1/3)=e^{-3(1/3)}=e^{-1}\approx 0.3679 \)
+      </p>
+
+      <p>
+        La probabilidad de esperar más de
+        <strong>20 minutos</strong>
+        hasta la próxima llegada es aproximadamente
+        <strong>36.79 %</strong>.
+      </p>
+    </div>
+
+  </div>
+</section>
+<section>
+  <div class="section-tag">Problemas típicos</div>
+  <h2 class="section-title">Ejercicios frecuentes (1/2)</h2>
+
+  <div class="problem-grid">
+
+    <div class="problem-card">
+      <h3><i class="fa-solid fa-hashtag"></i> Problema 1: Poisson</h3>
+      <p>
+        En promedio llegan 3 clientes por hora.  
+        ¿Cuál es la probabilidad de que lleguen exactamente 2 clientes en una hora?
+      </p>
+
+      <button class="solution-btn" data-target="sol1">Ver solución</button>
+
+      <div id="sol1" class="solution-box">
+        <p class="math">\( P(X=2)=\dfrac{e^{-3}3^2}{2!} \approx 0.2240 \)</p>
+        <p>Resultado: <strong>22.40 %</strong></p>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <h3><i class="fa-solid fa-hashtag"></i> Problema 2: Poisson</h3>
+      <p>
+        Si una central recibe en promedio 5 llamadas por minuto,  
+        ¿cuál es la probabilidad de recibir exactamente 4 llamadas en un minuto?
+      </p>
+
+      <button class="solution-btn" data-target="sol2">Ver solución</button>
+
+      <div id="sol2" class="solution-box">
+        <p class="math">\( P(X=4)=\dfrac{e^{-5}5^4}{4!} \approx 0.1755 \)</p>
+        <p>Resultado: <strong>17.55 %</strong></p>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <h3><i class="fa-regular fa-clock"></i> Problema 3: Exponencial</h3>
+      <p>
+        Si la tasa es de 3 clientes por hora,  
+        ¿cuál es la probabilidad de esperar más de 20 minutos?
+      </p>
+
+      <button class="solution-btn" data-target="sol3">Ver solución</button>
+
+      <div id="sol3" class="solution-box">
+        <p class="math">\( P(T>1/3)=e^{-3(1/3)}=e^{-1}\approx 0.3679 \)</p>
+        <p>Resultado: <strong>36.79 %</strong></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-tag">Problemas típicos</div>
+  <h2 class="section-title">Ejercicios frecuentes (2/2)</h2>
+
+  <div class="problem-grid">
+
+    <div class="problem-card">
+      <h3><i class="fa-regular fa-clock"></i> Problema 4: Exponencial</h3>
+      <p>
+        Si una máquina falla con tasa promedio de 2 fallas por día,  
+        ¿cuál es la probabilidad de que pase más de medio día sin fallar?
+      </p>
+
+      <button class="solution-btn" data-target="sol4">Ver solución</button>
+
+      <div id="sol4" class="solution-box">
+        <p class="math">\( P(T>0.5)=e^{-2(0.5)}=e^{-1}\approx 0.3679 \)</p>
+        <p>Resultado: <strong>36.79 %</strong></p>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <h3><i class="fa-solid fa-link"></i> Problema 5: Relación</h3>
+      <p>
+        Explica por qué  
+        \( P(T>t)=P(N(t)=0) \)
+      </p>
+
+      <button class="solution-btn" data-target="sol5">Ver solución</button>
+
+      <div id="sol5" class="solution-box">
+        <p>
+          Esperar más de \(t\) significa que no ha ocurrido ningún evento en el intervalo \([0,t]\).
+        </p>
+      </div>
+    </div>
+
+    <div class="problem-card">
+      <h3><i class="fa-solid fa-chart-line"></i> Problema 6: Interpretación</h3>
+      <p>
+        Si \( \lambda \) aumenta, ¿qué ocurre con:
+        <br>• número de eventos
+        <br>• tiempo de espera?
+      </p>
+
+      <button class="solution-btn" data-target="sol6">Ver solución</button>
+
+      <div id="sol6" class="solution-box">
+        <p><strong>Eventos:</strong> aumentan</p>
+        <p><strong>Tiempo:</strong> disminuye (\( E[T]=1/\lambda \))</p>
+      </div>
+    </div>
+
+  </div>
+</section>
       <!-- 10. CONCLUSIONES -->
       <section>
   <div class="section-tag">Conclusiones</div>
