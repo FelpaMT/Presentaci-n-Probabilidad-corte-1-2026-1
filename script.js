@@ -249,40 +249,82 @@ if (simLambdaSlider && generateEventsBtn) {
 }
 
 const miniCtx = document.getElementById("miniPoissonChart");
+const appLambdaSlider = document.getElementById("appLambdaSlider");
+const appLambdaValue = document.getElementById("appLambdaValue");
+const appPoissonProb = document.getElementById("appPoissonProb");
+const appExpMean = document.getElementById("appExpMean");
+const appLambdaText = document.getElementById("appLambdaText");
 
-if (miniCtx) {
-  const lambdaMini = 3;
+let miniPoissonChart = null;
+
+function getAppLambdaMessage(lambda) {
+  if (lambda < 2) {
+    return `Con λ = ${lambda}, se esperan pocos clientes por hora y la espera promedio es relativamente alta.`;
+  } else if (lambda < 4) {
+    return `Con λ = ${lambda}, el número esperado de clientes por hora es moderado.`;
+  } else {
+    return `Con λ = ${lambda}, se esperan más clientes por hora y la espera promedio disminuye notablemente.`;
+  }
+}
+
+function createOrUpdateMiniPoissonChart(lambda) {
+  if (!miniCtx) return;
+
   const labelsMini = Array.from({ length: 8 }, (_, i) => i);
+  const dataMini = labelsMini.map(k => poissonProbability(k, lambda));
 
-  const dataMini = labelsMini.map(k =>
-    (Math.exp(-lambdaMini) * Math.pow(lambdaMini, k)) / factorial(k)
-  );
-
-  new Chart(miniCtx, {
-    type: "bar",
-    data: {
-      labels: labelsMini,
-      datasets: [{
-        data: dataMini,
-        backgroundColor: "rgba(53, 92, 222, 0.6)",
-        borderRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false }
+  if (!miniPoissonChart) {
+    miniPoissonChart = new Chart(miniCtx, {
+      type: "bar",
+      data: {
+        labels: labelsMini,
+        datasets: [{
+          data: dataMini,
+          backgroundColor: "rgba(53, 92, 222, 0.6)",
+          borderColor: "rgba(53, 92, 222, 1)",
+          borderWidth: 1,
+          borderRadius: 6
+        }]
       },
-      scales: {
-        x: {
-          ticks: { font: { size: 10 } }
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false,
+        plugins: {
+          legend: { display: false }
         },
-        y: {
-          display: false
+        scales: {
+          x: {
+            ticks: { font: { size: 10 } }
+          },
+          y: {
+            display: false,
+            beginAtZero: true
+          }
         }
       }
-    }
+    });
+  } else {
+    miniPoissonChart.data.datasets[0].data = dataMini;
+    miniPoissonChart.update();
+  }
+}
+
+function updateApplicationExample(lambda) {
+  if (appLambdaValue) appLambdaValue.textContent = lambda;
+  if (appPoissonProb) appPoissonProb.textContent = poissonProbability(2, lambda).toFixed(4);
+  if (appExpMean) appExpMean.textContent = (1 / lambda).toFixed(4);
+  if (appLambdaText) appLambdaText.textContent = getAppLambdaMessage(lambda);
+
+  createOrUpdateMiniPoissonChart(lambda);
+}
+
+if (appLambdaSlider) {
+  updateApplicationExample(parseFloat(appLambdaSlider.value));
+
+  appLambdaSlider.addEventListener("input", (e) => {
+    const lambda = parseFloat(e.target.value);
+    updateApplicationExample(lambda);
   });
 }
 const realCards = document.querySelectorAll(".real-card");
@@ -331,3 +373,196 @@ document.querySelectorAll(".solution-btn").forEach((button) => {
     button.textContent = isOpen ? "Ver solución" : "Ocultar solución";
   });
 });
+
+const quizData = [
+  {
+    question: "Si λ = 3, ¿qué modelo usarías para calcular el tiempo hasta el siguiente evento?",
+    options: [
+      "Distribución de Poisson",
+      "Distribución exponencial negativa",
+      "Distribución binomial"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. La exponencial negativa modela el tiempo de espera."
+  },
+  {
+    question: "¿Qué representa λ en estos modelos?",
+    options: [
+      "La probabilidad de un evento",
+      "La tasa promedio de ocurrencia",
+      "El número total de eventos"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. λ es la tasa promedio por unidad de tiempo."
+  },
+  {
+    question: "¿Qué modela la distribución de Poisson?",
+    options: [
+      "El tiempo entre eventos",
+      "El número de eventos en un intervalo",
+      "La probabilidad acumulada"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. Poisson modela conteo de eventos."
+  },
+  {
+    question: "¿Qué modela la distribución exponencial negativa?",
+    options: [
+      "El número de eventos",
+      "El tiempo entre eventos",
+      "La media de eventos"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. Modela el tiempo de espera."
+  },
+  {
+    question: "Si λ aumenta, ¿qué ocurre con el tiempo promedio de espera?",
+    options: [
+      "Aumenta",
+      "Disminuye",
+      "Permanece igual"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. E[T] = 1/λ, por lo tanto disminuye."
+  },
+  {
+    question: "¿Cuál es la relación correcta entre ambas distribuciones?",
+    options: [
+      "P(T > t) = P(N(t)=0)",
+      "P(X = x) = λt",
+      "E[T] = λ"
+    ],
+    correctIndex: 0,
+    explanation: "Correcto. Ambas distribuciones están conectadas por esa relación."
+  },
+  {
+    question: "Si en promedio ocurren 4 eventos por hora, ¿cuál es λ?",
+    options: [
+      "λ = 1/4",
+      "λ = 4",
+      "λ = 0"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. λ es la tasa promedio."
+  },
+  {
+    question: "Si no ocurre ningún evento en un intervalo, ¿qué describe mejor esta situación?",
+    options: [
+      "Un valor alto de λ",
+      "Tiempo de espera grande",
+      "Distribución uniforme"
+    ],
+    correctIndex: 1,
+    explanation: "Correcto. Significa que el tiempo hasta el evento es mayor."
+  }
+];
+
+const quizQuestion = document.getElementById("quizQuestion");
+const quizOptions = document.getElementById("quizOptions");
+const quizFeedback = document.getElementById("quizFeedback");
+const quizNextBtn = document.getElementById("quizNextBtn");
+const quizRestartBtn = document.getElementById("quizRestartBtn");
+const quizCurrent = document.getElementById("quizCurrent");
+const quizScore = document.getElementById("quizScore");
+
+let quizIndex = 0;
+let score = 0;
+let answered = false;
+
+function renderQuizQuestion() {
+  if (!quizQuestion || !quizOptions) return;
+
+  const item = quizData[quizIndex];
+  answered = false;
+
+  quizCurrent.textContent = quizIndex + 1;
+  quizScore.textContent = score;
+  quizQuestion.textContent = item.question;
+  quizOptions.innerHTML = "";
+  quizFeedback.textContent = "";
+  quizFeedback.className = "quiz-feedback";
+  quizNextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.textContent = option;
+
+    btn.addEventListener("click", () => handleQuizAnswer(index, btn));
+    quizOptions.appendChild(btn);
+  });
+
+  if (window.MathJax?.typesetPromise) {
+    MathJax.typesetPromise();
+  }
+}
+
+function handleQuizAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const item = quizData[quizIndex];
+  const optionButtons = Array.from(document.querySelectorAll(".quiz-option"));
+
+  optionButtons.forEach((btn, idx) => {
+    btn.classList.add("disabled");
+
+    if (idx === item.correctIndex) {
+      btn.classList.add("correct");
+    }
+  });
+
+  if (selectedIndex === item.correctIndex) {
+    score += 1;
+    quizFeedback.textContent = item.explanation;
+    quizFeedback.className = "quiz-feedback correct";
+  } else {
+    selectedButton.classList.add("incorrect");
+    quizFeedback.textContent = `Incorrecto. ${item.explanation}`;
+    quizFeedback.className = "quiz-feedback incorrect";
+  }
+
+  quizScore.textContent = score;
+  quizNextBtn.disabled = false;
+
+  if (quizIndex === quizData.length - 1) {
+    quizNextBtn.textContent = "Finalizar";
+  }
+}
+
+function showQuizFinalResult() {
+  quizQuestion.textContent = "Resultado final";
+  quizOptions.innerHTML = "";
+  quizFeedback.textContent = `Obtuviste ${score} de ${quizData.length} respuestas correctas.`;
+  quizFeedback.className = score === quizData.length ? "quiz-feedback correct" : "quiz-feedback";
+  quizNextBtn.disabled = true;
+}
+
+if (quizNextBtn) {
+  quizNextBtn.addEventListener("click", () => {
+    if (quizIndex < quizData.length - 1) {
+      quizIndex += 1;
+      renderQuizQuestion();
+    } else {
+      showQuizFinalResult();
+    }
+  });
+}
+
+if (quizRestartBtn) {
+  quizRestartBtn.addEventListener("click", () => {
+    quizIndex = 0;
+    score = 0;
+    quizNextBtn.textContent = "Siguiente";
+    renderQuizQuestion();
+  });
+}
+
+if (quizQuestion && quizOptions) {
+  renderQuizQuestion();
+}
+
+const quizTotal = document.getElementById("quizTotal");
+if (quizTotal) {
+  quizTotal.textContent = quizData.length;
+}
